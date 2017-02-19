@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
-import java.util.Objects;
 
 /**
  *A common controller class for handling CRUD operations
@@ -13,25 +12,111 @@ import java.util.Objects;
  */
 public class Controller {
 
-    public void createFacultyAccount(Connection con, String firstName, String lastName, String resumeAddress, String sex, int age){
+    public Exception createFacultyAccount(Connection con,  String username,
+                                     String password, String subject1,
+                                     String subject2, String subject3, String subject4 ){
         try {
-            PreparedStatement statement = con.prepareStatement("INSERT INTO facultyInfo (firstName, lastName, resumeAddress, sex, age ) VALUES (? ,? , ? , ? , ?);");
-            statement.setString(1, firstName);
-            statement.setString(2,lastName);
-            statement.setString(3, resumeAddress);
-            statement.setString(4, sex);
-            statement.setInt(5, age);
+
+
+
+            PreparedStatement statement = con.prepareStatement
+                    ("INSERT INTO users (subject1, subject2, subject3, subject4 ,username, password) VALUES (? ,? , ? , ? , ?, ?);");
+            statement.setString(1, subject1);
+            statement.setString(2, subject2);
+            statement.setString(3, subject3);
+            statement.setString(4, subject4);
+            statement.setString(5, username);
+            statement.setString(6,password);
+
+
+          statement.execute();
+
+
+            return null;
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return e;
+        }
+
+    }
+
+
+
+
+    public static Exception createHomework(Connection con, String title, String subject, int cls, String file) {
+
+        try {
+
+            PreparedStatement statement = con.prepareStatement
+                    ("INSERT INTO homework (title, subject,cls,file) VALUES (?,?,?,?);");
+
+            statement.setString(1, title);
+            statement.setString(2, subject);
+            statement.setInt(3, cls);
+            statement.setString(4, file);
+            statement.execute();
+            return null;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return e;
+        }
+    }
+
+
+    public Exception addFile(Connection con, String title, String subject, String Class, String file){
+        try {
+            PreparedStatement statement = con.prepareStatement
+                    ("INSERT INTO homework (title, subject, cls, file ) VALUES (?, ?, ?,?);");
+            statement.setString(1, title);
+            statement.setString(2, subject);
+            statement.setString(3, Class);
+            statement.setString(4, file);
 
             statement.execute();
+            return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return e;
+        }
 
+    }
+
+
+
+ public Exception addAttendance(Connection con, String description, String path){
+        try {
+            PreparedStatement statement = con.prepareStatement
+                    ("INSERT INTO attendancerecord (description, path ) VALUES (?, ?);");
+            statement.setString(1, description);
+            statement.setString(2, path);
+
+            statement.execute();
+            return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return e;
+        }
+
+    }
+
+
+    public ResultSet getFiles(Connection con, String query ) {
+        ResultSet resultSet = null;
+        try {
+
+            PreparedStatement preparedStatement = preparedStatement = con.prepareStatement(query);
+            resultSet = preparedStatement.executeQuery();
 
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
+        return resultSet;
     }
-
 
     public ResultSet readFacultyAccount(Connection con, String query ) {
         ResultSet resultSet = null;
@@ -58,41 +143,20 @@ public class Controller {
      * @return
      */
 
-    public boolean updateFacultyInfoWithQuery(Connection con, String query){
+    public Exception updateFacultyInfoWithQuery(Connection con, String query){
         int i =0;
         try {
             Statement statement = con.createStatement();
-            i = statement.executeUpdate(query);
+            statement.executeUpdate(query);
+
+            return null;
 
         } catch (SQLException e) {
             e.printStackTrace();
+            return e;
         }
 
-        if(i==0)return false;
-        else return true;
     }
-
-
-
-    /*
-
-    ADIMN:
-    DONE - add users C
-    DONE - retrieving the information R
-    DONE  -update users info U
-    TODO -delete user D
-    */
-
-
-    /*
-
-    Faculty members can
-    TODO view- as Profiles R
-    TODO update  U TODO their personal and professional information
-
-    */
-
-
 
 
     public boolean deleteFacultyWithQuery(Connection con, String query){
@@ -105,8 +169,7 @@ public class Controller {
             e.printStackTrace();
         }
 
-        if(i==0)return false;
-        else return true;
+        return i != 0;
     }
 
 
@@ -165,9 +228,121 @@ public class Controller {
 
     }
 
+    public static Exception createStaff(Connection con, String name,String designation, String education, String s){
+        try {
+
+            PreparedStatement statement = con.prepareStatement
+                    ("INSERT INTO staff (name, designation, education, image)  VALUES (?,?,?,?);");
+            statement.setString(1, name);
+            statement.setString(2, designation);
+            statement.setString(3, education);
+            statement.setString(4, s);
+            statement.execute();
+
+            return null;
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return e;
+        }
+
+    }
+
+    public static Exception addSliderImage(Connection con, String image) {
+        try {
+
+            PreparedStatement statement = con.prepareStatement
+                    ("INSERT INTO slider (image) VALUES (?);");
+            statement.setString(1, image);
+
+            statement.execute();
+            return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return e;
+        }
+
+    }
+
+
+    public static Exception createNotice(Connection con, String title, String description, String s) {
+
+        try {
+
+            PreparedStatement statement = con.prepareStatement
+                    ("INSERT INTO notice (title, description, image)  VALUES (?,?,?);");
+            statement.setString(1, title);
+            statement.setString(2, description);
+            statement.setString(3, s);
+            statement.execute();
+
+            return null;
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return e;
+        }
+
+    }
+
+    public static Exception insertEvent(Connection con, String title, String description,String image) {
+
+        try {
+
+            PreparedStatement statement = con.prepareStatement
+                    ("INSERT INTO event (title, description,image) VALUES (?,?,?);");
+            statement.setString(1, title);
+            statement.setString(2, description);
+            statement.setString(3, image);
+            statement.execute();
+            return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return e;
+        }
+    }
+
+
+    public static Exception insertImageInGallery(Connection con, String label, String filePath) {
+        try {
+
+            PreparedStatement statement = con.prepareStatement
+                    ("INSERT INTO gallery (label, image) VALUES (?,?);");
+            statement.setString(1, label);
+            statement.setString(2, filePath);
+            statement.execute();
+
+            return null;
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return e;
+        }
+    }
 }
 
 
 
 
 
+
+    /*
+
+    ADIMN:
+    DONE - add users C
+    DONE - retrieving the information R
+    DONE  -update users info U
+    TODO -delete user D
+    */
+
+
+    /*
+
+    Faculty members can
+    TODO view- as Profiles R
+    TODO update  U TODO their personal and professional information
+
+    */

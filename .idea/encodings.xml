@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/java/com/vibhuti/lms/Delete" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/java/com/vibhuti/lms/Delete/DeleteValuesServlet.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/java/com/vibhuti/lms/Event.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/java/com/vibhuti/lms/Gallery.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/java/com/vibhuti/lms/Homework.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/java/com/vibhuti/lms/Notice.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/java/com/vibhuti/lms/Slider.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/java/com/vibhuti/lms/Staff.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/java/com/vibhuti/lms/UploadController.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/java/com/vibhuti/lms/filters/ViewAndAnalysisFilter.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/AdminPanel.jsp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/assets" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/css" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/login.html" charset="windows-1252" />
   </component>
 </project>
